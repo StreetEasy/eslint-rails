@@ -1,8 +1,9 @@
 module ESLintRails
   class Config
 
-    def self.read(force_default: false)
-      self.new(force_default: force_default).send(:read)
+    def self.read(options = {})
+      force_default = options.fetch(:force_default, false)
+      self.new(force_default).send(:read)
     end
 
     private
@@ -10,7 +11,7 @@ module ESLintRails
     CONFIG_PATH = 'config/eslint.json'
     private_constant :CONFIG_PATH
 
-    def initialize(force_default:)
+    def initialize(force_default)
       @force_default = force_default
       @custom_file   = Rails.root.join(CONFIG_PATH)
       @default_file  = ESLintRails::Engine.root.join(CONFIG_PATH)
