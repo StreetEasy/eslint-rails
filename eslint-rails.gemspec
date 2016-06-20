@@ -1,11 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'eslint-rails/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'eslint-rails'
-  spec.version       = ESLintRails::VERSION
+  spec.version       = '1.0.0'
   spec.authors       = ['Justin Force', 'Jon Kessler']
   spec.email         = ['justin.force@appfolio.com', 'jon.kessler@appfolio.com']
   spec.summary       = %q{A Rails wrapper for ESLint.}
