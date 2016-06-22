@@ -36,9 +36,7 @@ in your browser. To force retrieval of the default conguration, use
 
 ![rake-eslint-rails-run][]
 
-```sh
-rake eslint:run
-```
+#### `rake eslint:run`
 
 This will analyze `application.js`. Optionally, you can supply a filename to the
 task. To analyze `components/woop.js` and `utilities.js.coffee.erb` you would
@@ -49,19 +47,22 @@ rake eslint:run[components/woop]
 rake eslint:run[utilities]
 ```
 
-You can also lint all JavaScript files for a given directory.
+#### `rake eslint:run_dir`
 
-```sh
-rake eslint:run_dir
-```
+This will analyze all JavaScript files in the 'app/assets' directory (including JSX, JSON, JS.ERB, etc.).
 
-This will analyze all JavaScript files in the 'app' directory. Optionally, you can supply a specific directory to the task. To anaylze all JS files in the `components` directory, you would run:
+You can supply a specific directory to the task. To anaylze all JS files in the `components` directory, you would run:
 
 ```sh
 rake eslint:run_dir[components]
 ```
 
-_Keep in mind that this will lint any file with a `.js` extension (including JSX, JSON, JS.ERB, etc.)_
+To exclude specific files from linting, you can pass the exclude argument a comma separated list of files.
+This is useful for excluding large manifest files when linting a directory.
+
+```sh
+rake eslint:run_dir exclude=application.js
+```
 
 ### Web interface
 

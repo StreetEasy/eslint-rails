@@ -20,19 +20,25 @@ namespace :eslint do
 
   desc 'Run ESlint against each JavaScript file for a specified directory and report warnings'
   task :run_dir, [:directory] => :environment do |_, args|
-    directory_path = Dir["app"][0] # if a directory is not set as an argument, grab all the JavaScript files in the 'app' directory (so we're not linting external assets)
-    
+    directory_path = Dir["app/assets"][0] # if a directory is not set as an argument, grab all the JavaScript files in the 'assets' directory
+
     if args[:directory] # if a directory is provided, get its path
-      directory_path = Dir["**/#{args[:directory]}"][0]
+      directory_path = Dir["app/assets/**/#{args[:directory]}"][0]
     end
 
     full_paths = Dir["#{directory_path}/**/*.js*"]
     file_paths = full_paths.map do |path|
-      
-      short_path = (path.split('/') - ["app", "assets", "javascripts"]).join('/') # strip 'app/assets/javascripts/' from the path
+      path.sub!(/^app\/assets\//, "") # strip 'app/assets/' from the path
     end
-    file_paths.each_with_index do |filename, i|
-      puts full_paths[i].blue # list the filename for clarity
+
+    # exclude files from linting, e.g. rake eslint:run_dir exclude=application.js
+    excluded_files = ENV['exclude'].split(",")
+    file_paths = file_paths.reject do |path|
+      excluded_files.include? path
+    end
+
+    file_paths.each do |filename|
+      puts filename.blue # list the filename for clarity
 
       warnings = ESLintRails::Runner.new(filename).run # run ESLint on every file for the directory
       if warnings.empty?
