@@ -30,7 +30,6 @@ namespace :eslint do
     file_paths = full_paths.map do |path|
       
       short_path = (path.split('/') - ["app", "assets", "javascripts"]).join('/') # strip 'app/assets/javascripts/' from the path
-      short_path.split('.')[0] # strip the path and the file type(.js, .jsx, etc.) from the file name
     end
     file_paths.each_with_index do |filename, i|
       puts full_paths[i].blue # list the filename for clarity
