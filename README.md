@@ -64,6 +64,12 @@ This is useful for excluding large manifest files when linting a directory.
 rake eslint:run_dir exclude=application.js
 ```
 
+To break on the first error, add the `breakOnError` argument.
+
+```sh
+rake eslint:run_dir breakOnError=true
+```
+
 ### Web interface
 
 On non-production environments, visit these URLs on your application:

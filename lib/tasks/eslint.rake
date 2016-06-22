@@ -38,14 +38,16 @@ namespace :eslint do
     end
 
     file_paths.each do |filename|
-      puts filename.blue # list the filename for clarity
-
       warnings = ESLintRails::Runner.new(filename).run # run ESLint on every file for the directory
+      success = "\u2713"
+      failure = "\u2717"
       if warnings.empty?
-        puts 'All good! :)'.green
+        print success.encode('utf-8').green, " ", filename.blue, "\n"
       else
+        print failure.encode('utf-8').red, " ", filename.blue, "\n"
         formatter = ESLintRails::TextFormatter.new(warnings)
         formatter.format
+        break if ENV['breakOnError']
       end
     end
   end
