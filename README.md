@@ -57,11 +57,11 @@ You can supply a specific directory to the task. To anaylze all JS files in the 
 rake eslint:run_dir[components]
 ```
 
-To exclude specific files from linting, you can pass the exclude argument a comma separated list of files.
-This is useful for excluding large manifest files when linting a directory.
+To ignore specific files when linting, you can pass the `ignore` param with a comma separated list of files.
+This is useful for ignoring large manifest files when linting a directory.
 
 ```sh
-rake eslint:run_dir exclude=application.js
+rake eslint:run_dir ignore=application.js
 ```
 
 To break on the first error, add the `breakOnError` argument.

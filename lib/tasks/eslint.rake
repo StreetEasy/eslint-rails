@@ -31,8 +31,8 @@ namespace :eslint do
       path.sub!(/^app\/assets\//, "") # strip 'app/assets/' from the path
     end
 
-    # exclude files from linting, e.g. rake eslint:run_dir exclude=application.js
-    excluded_files = ENV['exclude'].split(",")
+    # exclude files from linting, e.g. rake eslint:run_dir ignore=application.js
+    excluded_files = ENV['ignore'] ? ENV['ignore'].split(",") : []
     file_paths = file_paths.reject do |path|
       excluded_files.include? path
     end
